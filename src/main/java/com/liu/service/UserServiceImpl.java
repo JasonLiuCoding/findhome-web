@@ -24,13 +24,13 @@ import com.liu.model.User;
 public class UserServiceImpl implements UserService{
 
 	@Resource
-	UserDao userMapping;//Êı¾İ¿âµ÷ÓÃ·½Ê½1
+	UserDao userMapping;//æ•°æ®åº“è°ƒç”¨æ–¹å¼1
 	
 	@Resource
-	DataSource dataSource;//Êı¾İ¿âµ÷ÓÃ·½Ê½2
+	DataSource dataSource;//æ•°æ®åº“è°ƒç”¨æ–¹å¼2
 	
 	@Resource
-	SqlSessionFactory sqlSessionFactory;//Êı¾İ¿âµ÷ÓÃ·½Ê½2
+	SqlSessionFactory sqlSessionFactory;//æ•°æ®åº“è°ƒç”¨æ–¹å¼2
 	
 	@Autowired
 	AutoNumberService autoNumberService;
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService{
 		int num = userMapping.findNum2(paramsMap);
 		System.out.println(num);
 		
-		//²åÈë
+		//æ’å…¥
 		User u = new User(3,"cc","qq3","phone3");
 		//userMapping.insert(u);
 		
@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService{
 		}
 	}
 	
-	//ÆäËûµ÷ÓÃ·½Ê½
+	//å…¶ä»–è°ƒç”¨æ–¹å¼
 	public void findUser(){
 		JdbcTemplate jdbcTemplateObject =  new JdbcTemplate(dataSource);
 		Integer queryForObject = jdbcTemplateObject.queryForObject("select userId from user where name='aa'",Integer.class);

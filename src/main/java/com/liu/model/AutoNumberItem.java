@@ -9,7 +9,7 @@ public class AutoNumberItem {
 	public AutoNumberItem() {
 	}
 	
-	//ÆæİâµÄÊÇ£¬mybites²éÑ¯³öÀ´ÊÊÓÃÄ¬ÈÏ¹¹Ôìº¯Êı
+	//å¥‡è‘©çš„æ˜¯ï¼ŒmybitesæŸ¥è¯¢å‡ºæ¥é€‚ç”¨é»˜è®¤æ„é€ å‡½æ•°
 	public AutoNumberItem(int start, int step) {
 		this.start = start;
 		this.step = step;
