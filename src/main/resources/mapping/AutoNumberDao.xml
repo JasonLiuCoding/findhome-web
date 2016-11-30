@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<!--   
+    namespace：必须与对应的接口全类名一致  
+    id:必须与对应接口的某个对应的方法名一致  
+      
+ -->  
+<mapper namespace="com.liu.dao.AutoNumberDao">  
+
+	<resultMap type="com.liu.model.AutoNumberItem" id="itemMap">
+		<result column="Start" property="start" />
+		<result column="Step" property="step" />
+	</resultMap>
+     <!-- mybsits_config中配置的alias类别名,也可直接配置resultType为类路劲 -->    
+    <select id="select" parameterType="String" resultMap="itemMap">  
+    <![CDATA[ 
+        select Start,Step from autonumber where name=#{name} FOR UPDATE
+    ]]>
+    </select> 
+    
+    <insert id="insert" parameterType="com.liu.model.AutoNumberItem" flushCache="true">  
+        insert into autonumber (Name, Start, Step) values (#{name,jdbcType=VARCHAR}, #{start,jdbcType=INTEGER}, #{step,jdbcType=INTEGER})  
+    </insert>
+    
+    <update id="update">
+		update autonumber
+		<trim prefix="set" suffixOverrides=",">
+			<if test="inc!=null">start=start+#{inc,jdbcType=INTEGER},</if>
+		</trim>
+		where Name=#{name,jdbcType=VARCHAR}
+	</update> 
+      
+</mapper> 
