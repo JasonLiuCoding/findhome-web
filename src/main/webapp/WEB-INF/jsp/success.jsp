@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 注册成功额~~（取ModelAndView的值还的用User对象的小写）
-${user.name }
+${user.userName }
 </body>
 </html>

@@ -15,4 +15,11 @@ public class ExceptionHandler {
 		model.addObject("errorMsg", e.getMsg());
 		return model;
 	}
+	
+	@org.springframework.web.bind.annotation.ExceptionHandler(Exception.class)
+	public ModelAndView handleException(Exception e){
+		ModelAndView model = new ModelAndView("error/error");
+		model.addObject("errorMsg", e.getMessage());
+		return model;
+	}
 }

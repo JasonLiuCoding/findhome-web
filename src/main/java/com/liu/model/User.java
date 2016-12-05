@@ -2,20 +2,17 @@ package com.liu.model;
 
 public class User {
 
-	public int userId;
-	public String name;
-	public String phone;
-	public String qq;
+	private int userId;
+	private String userName;
+	private String password;
 
-	
 	public User() {
 	}
 
-	public User(int userId, String name, String phone, String qq) {
+	public User(int userId, String userName, String password) {
 		this.userId = userId;
-		this.name = name;
-		this.phone = phone;
-		this.qq = qq;
+		this.userName = userName;
+		this.password = password;
 	}
 
 	public int getUserId() {
@@ -26,29 +23,20 @@ public class User {
 		this.userId = userId;
 	}
 
-	public String getName() {
-		return name;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
-	public String getPhone() {
-		return phone;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setPassword(String password) {
+		this.password = password;
 	}
-
-	public String getQq() {
-		return qq;
-	}
-
-	public void setQq(String qq) {
-		this.qq = qq;
-	}
-
 
 }

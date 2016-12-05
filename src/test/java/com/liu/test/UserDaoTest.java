@@ -9,20 +9,20 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.liu.dao.UserDao;
-import com.liu.model.User;
+import com.liu.dao.UserInfoDao;
+import com.liu.model.UserInfo;
 
 public class UserDaoTest {
 
 	@Test
 	public void findUser(){
 		SqlSession sqlSession = getSessionFactory().openSession();  
-		UserDao userMapper = sqlSession.getMapper(UserDao.class);  
-		User user = userMapper.findUser("liu");
-		Assert.assertNotNull("Ã»ÕÒµ½Êý¾Ý", user);
+		UserInfoDao userMapper = sqlSession.getMapper(UserInfoDao.class);  
+		UserInfo user = userMapper.findUser("liu");
+		Assert.assertNotNull("Ã»ï¿½Òµï¿½ï¿½ï¿½ï¿½", user);
 	}
 	
-	//Mybatis Í¨¹ýSqlSessionFactory»ñÈ¡SqlSession, È»ºó²ÅÄÜÍ¨¹ýSqlSessionÓëÊý¾Ý¿â½øÐÐ½»»¥
+	//Mybatis Í¨ï¿½ï¿½SqlSessionFactoryï¿½ï¿½È¡SqlSession, È»ï¿½ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½SqlSessionï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½Ð½ï¿½ï¿½ï¿½
     private static SqlSessionFactory getSessionFactory() {  
         SqlSessionFactory sessionFactory = null;  
         String resource = "spring-mybatis.xml";  
@@ -38,9 +38,9 @@ public class UserDaoTest {
     @Test
 	public void findUser2(){
 		SqlSession sqlSession = getSessionFactory2().openSession();  
-		UserDao userMapper = sqlSession.getMapper(UserDao.class);  
-		User user = userMapper.findUser("liu");
-		Assert.assertNotNull("Ã»ÕÒµ½Êý¾Ý", user);
+		UserInfoDao userMapper = sqlSession.getMapper(UserInfoDao.class);  
+		UserInfo user = userMapper.findUser("liu");
+		Assert.assertNotNull("Ã»ï¿½Òµï¿½ï¿½ï¿½ï¿½", user);
 	}
     private static SqlSessionFactory getSessionFactory2() {  
         SqlSessionFactory sessionFactory = null;  

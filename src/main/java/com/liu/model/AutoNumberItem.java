@@ -8,8 +8,8 @@ public class AutoNumberItem {
 
 	public AutoNumberItem() {
 	}
-	
-	//奇葩的是，mybites查询出来适用默认构造函数
+
+	// 奇葩的是，mybites查询出来适用默认构造函数
 	public AutoNumberItem(int start, int step) {
 		this.start = start;
 		this.step = step;

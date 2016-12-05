@@ -44,7 +44,7 @@ public class AutoNumberImplService implements AutoNumberService {
 	@Transactional
 	private AutoNumberItem getNewStep(AutoNumberType type) {
 		AutoNumberItem item = dao.select(type.name);
-		item = new AutoNumberItem(item.getStart(), item.getStep());//ÊÂÎñÀï²éÑ¯³öÀ´µÄ½á¹ûÊÊÓÃ¿Õ¹¹Ôìº¯Êı£¬ËùÒÔ¶ÔÏóµÄÆäËûÖµÎªÄ¬ÈÏÖµ
+		item = new AutoNumberItem(item.getStart(), item.getStep());// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½Ä½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿Õ¹ï¿½ï¿½ìº¯ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÖµÎªÄ¬ï¿½ï¿½Öµ
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("name", type.name);
 		params.put("inc", item.getStep());

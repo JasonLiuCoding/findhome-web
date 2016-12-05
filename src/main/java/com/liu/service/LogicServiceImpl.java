@@ -1,14 +1,27 @@
 package com.liu.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.liu.dao.LoginDao;
+import com.liu.model.User;
+
 @Service
-public class LogicServiceImpl implements LogicService{
+public class LogicServiceImpl implements LogicService {
+
+	@Autowired
+	private LoginDao dao;
 
 	@Override
-	public boolean login(String name){
-		System.out.println(name);
-		return true;
+	public User login(String userName, String password) {
+		User u = dao.login(userName, password);
+		return u;
+	}
+
+	@Override
+	public int insert(User u) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

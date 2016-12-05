@@ -1,8 +1,8 @@
 package com.liu.service;
 
-import java.util.HashMap;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -13,93 +13,86 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.liu.dao.UserDao;
+import com.liu.dao.LoginDao;
+import com.liu.dao.UserInfoDao;
 import com.liu.model.AutoNumberType;
 import com.liu.model.User;
+import com.liu.model.UserInfo;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
 	@Resource
-	UserDao userMapping;//数据库调用方式1
-	
+	UserInfoDao userMapping;// 数据库调用方式1
+
 	@Resource
-	DataSource dataSource;//数据库调用方式2
-	
+	DataSource dataSource;// 数据库调用方式2
+
 	@Resource
-	SqlSessionFactory sqlSessionFactory;//数据库调用方式2
-	
+	LoginDao loginDao;
+
+	@Resource
+	SqlSessionFactory sqlSessionFactory;// 数据库调用方式2
+
 	@Autowired
 	AutoNumberService autoNumberService;
-	
-	private Logger log = LoggerFactory.getLogger(UserServiceImpl.class); 
+
+	private Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
+
 	@Override
-	public User findUser(String name) {
-		
-		
-		if(userMapping.findNum(name)>0){
-			log.error("hahhahahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"+userMapping.findNum(name));
-		}
-		User findUser = userMapping.findUser("aa");
-		Map<String, Object> paramsMap = new HashMap<String, Object>();
-		paramsMap.put("name", "aa");
-		int num = userMapping.findNum2(paramsMap);
-		System.out.println(num);
-		
-		//插入
-		User u = new User(3,"cc","qq3","phone3");
-		//userMapping.insert(u);
-		
-		
-		u = new User(4,"dd","qq4","phone4");
-		//userMapping.insert2(u);
-		
-		u.name = "newName4";
-		u.qq = "newQQ4";
-		userMapping.update(u);
-		userMapping.delete(3);
+	public UserInfo findUser(String name) {
+		UserInfo findUser = userMapping.findUser(name);
+		// UserInfo findUser = findUser2(name);
 		return findUser;
 	}
-	
-	public void getAllUser(){
-		List<User> allUser = userMapping.getAllUser();
+
+	// 其他调用方式
+	private UserInfo findUser2(String name) {
+		JdbcTemplate jdbcTemplateObject = new JdbcTemplate(dataSource);
+		UserInfo user = jdbcTemplateObject.queryForObject("select userId,name,age,phone,qq from userInfo where name=?",
+				new Object[] { name }, new RowMapper<UserInfo>() {
+					@Override
+					public UserInfo mapRow(ResultSet rs, int rowNum) throws SQLException {
+						return new UserInfo(rs.getInt("userId"), rs.getString("name"), rs.getInt("age"), rs
+								.getString("phone"), rs.getString("qq"));
+					}
+				});
+		return user;
+	}
+
+	public void getAllUser() {
+		List<UserInfo> allUser = userMapping.getAllUser();
 		System.out.println(allUser.size());
 		SqlSession session = sqlSessionFactory.openSession();
 		try {
-		 session.selectOne("org.mybatis.example.BlogMapper.selectBlog", 101);
+			session.selectOne("org.mybatis.example.BlogMapper.selectBlog", 101);
 		} finally {
-		  session.close();
+			session.close();
 		}
-	}
-	
-	//其他调用方式
-	public void findUser(){
-		JdbcTemplate jdbcTemplateObject =  new JdbcTemplate(dataSource);
-		Integer queryForObject = jdbcTemplateObject.queryForObject("select userId from user where name='aa'",Integer.class);
-		System.out.println(queryForObject);
 	}
 
 	@Transactional
 	@Override
-	public int addUser(String name, String qq, String phone) {
+	public int addUser(String name, int age, String qq, String phone) {
 		int nextId = autoNumberService.getNextNumber(AutoNumberType.User);
-		userMapping.insert(new User(nextId, name, phone, qq));
+		userMapping.insert(new UserInfo(nextId, name, age, phone, qq));
+		loginDao.insert(new User(nextId, name, "password"));// 先初始化一个
 		return 0;
 	}
 
 	@Override
-	public int updateUser(int id, String name, String qq, String phone) {
-		// TODO Auto-generated method stub
+	public int updateUser(int userId, String name, int age, String qq, String phone) {
+		userMapping.update(new UserInfo(userId, name, age, phone, qq));
 		return 0;
 	}
 
 	@Override
 	public int delete(int id) {
-		// TODO Auto-generated method stub
-		return 0;
+		return userMapping.delete(id);
 	}
 
 }

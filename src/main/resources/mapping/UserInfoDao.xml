@@ -6,65 +6,66 @@
     id:必须与对应接口的某个对应的方法名一致  
       
  -->  
-<mapper namespace="com.liu.dao.UserDao">  
+<mapper namespace="com.liu.dao.UserInfoDao">  
      <!-- mybsits_config中配置的alias类别名,也可直接配置resultType为类路劲 -->    
-    <select id="findUser" parameterType="String" resultType="com.liu.model.User">  
+    <select id="findUser" parameterType="String" resultType="com.liu.model.UserInfo">  
     <![CDATA[ 
-        select * from user where name=#{name}
+        select * from userInfo where name=#{name}
     ]]>
     </select> 
     <!-- 只有一个参数的时候 -->
     <select id="findNum" parameterType="String" resultType="int">  
      <![CDATA[ 
-        select userId from user where name='aa'
+        select userId from userInfo where name='aa'
      ]]>
     </select>  
     <!-- 有多个参数的时候，注意参数为Map<String,Object>，里面存储对应的参数名key和值 -->
-     <select id="findNum2" resultType="int">  
+     <select id="findNum2" resultType="com.liu.model.UserInfo">  
      <![CDATA[ 
-        select count(userId) from user where 1=1
+        select count(userId) from userInfo where 1=1
      ]]>
-     <if test="name != null">
-	    	AND name = #{name, jdbcType=VARCHAR}
-	 </if>
+	    AND name = #{name, jdbcType=VARCHAR}
     </select>  
     
-    <resultMap type="com.liu.model.User" id="userMap">
+    <resultMap type="com.liu.model.UserInfo" id="userMap">
 		<id column="userId" property="userId"/>
 		<result column="name" property="name"/>
+		<result column="age" property="age"/>
 		<result column="qq" property="qq"/>
 		<result column="phone" property="phone"/>
 	</resultMap>
     <select id="getAllUser" resultMap="userMap">
-		select * from user
+		select * from userInfo
 	</select>
     
-    <insert id="insert" parameterType="com.liu.model.User" flushCache="true">  
-        insert into user (userId, name, qq, phone) values (#{userId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR})  
+    <insert id="insert" parameterType="com.liu.model.UserInfo" flushCache="true">  
+        insert into userInfo (userId, name, age, qq, phone) values (#{userId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{qq,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR})  
     </insert>  
-    <insert id="insert2" parameterType="com.liu.model.User" flushCache="true">  
-        insert into user  
+    <insert id="insert2" parameterType="com.liu.model.UserInfo" flushCache="true">  
+        insert into userInfo  
         <trim prefix="(" suffix=")" suffixOverrides=",">  
-            userId, name, qq, phone,  
+            userId, name, age,  qq, phone,  
         </trim>  
         <trim prefix="values (" suffix=")" suffixOverrides=",">  
             #{userId,jdbcType=INTEGER},  
             #{name,jdbcType=VARCHAR},  
+            #{age,jdbcType=INTEGER},
             #{qq,jdbcType=VARCHAR},  
             #{phone,jdbcType=VARCHAR},  
         </trim>  
     </insert>
-    <update id="update" parameterType="com.liu.model.User">
-		update user
+    <update id="update" parameterType="com.liu.model.UserInfo">
+		update userInfo
 		<trim prefix="set" suffixOverrides=",">
 			<if test="name!=null">name=#{name},</if>
+			<if test="age!=null">age=#{age},</if>
 			<if test="qq!=null">qq=#{qq},</if>
 			<if test="phone!=null">phone=#{phone},</if>
 		</trim>
 		where userId=#{userId}
 	</update>
     <delete id="delete" parameterType="int">  
-        delete from user where userId=#{userId}  
+        delete from userInfo where userId=#{userId}  
     </delete>  
       
     <!-- <insert id="save" parameterType="User">  
