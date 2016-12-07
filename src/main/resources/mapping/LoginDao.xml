@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+
+<mapper namespace="com.liu.dao.LoginDao">  
+    <!-- 有多个参数的时候，注意参数为Map<String,Object>，里面存储对应的参数名key和值 -->
+    <select id="login"  resultType="com.liu.model.User">  
+    <![CDATA[ 
+        select * from user where userName=#{0} AND password = #{1}
+    ]]>
+    </select> 
+    
+    <insert id="insert" parameterType="com.liu.model.User" flushCache="true">  
+        insert into user (userId, userName, password) values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR})  
+    </insert>  
+
+      
+</mapper> 

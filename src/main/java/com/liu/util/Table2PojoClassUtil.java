@@ -45,7 +45,7 @@ public class Table2PojoClassUtil {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println("ÇëÊäÈë£º");
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ë£º");
 		  Scanner sc = new Scanner(System.in); 
 		  while(sc.hasNext()){
 			  String next = sc.nextLine();

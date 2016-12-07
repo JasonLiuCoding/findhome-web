@@ -29,7 +29,7 @@ public class UserManageController {
 		}
 		UserInfo findUser = userService.findUser(u.getName());
 		if (findUser != null) {
-			throw new SystemException(-500, "ÓÃ»§ÒÑ´æÔÚ");
+			throw new SystemException(-500, "ç”¨æˆ·å·²å­˜åœ¨");
 		}
 		userService.addUser(u.getName(), u.getAge(), u.getQq(), u.getPhone());
 		return "success";
