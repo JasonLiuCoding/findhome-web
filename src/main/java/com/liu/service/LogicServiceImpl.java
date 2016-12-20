@@ -11,6 +11,10 @@ public class LogicServiceImpl implements LogicService {
 
 	@Autowired
 	private LoginDao dao;
+	
+	@Autowired
+	RedisService redisService;
+	
 
 	@Override
 	public User login(String userName, String password) {
