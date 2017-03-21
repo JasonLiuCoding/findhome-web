@@ -1,13 +1,12 @@
 package com.liu.dao;
 
-import java.util.List;
-import java.util.Map;
+import org.apache.ibatis.annotations.Param;
 
 import com.liu.model.User;
-import com.liu.model.UserInfo;
 
 public interface LoginDao {
 
 	public User login(String userName, String password);
+	public User login2(@Param("name")String userName, @Param("password")String password);
 	public int insert(User u);
 }

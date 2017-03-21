@@ -17,27 +17,27 @@
     <dependency>
     	<groupId>org.springframework</groupId>
     	<artifactId>spring-aop</artifactId>
-    	<version>4.2.0.RELEASE</version>
+    	<version>${spring-version}</version>
     </dependency>
     <dependency>
     	<groupId>org.springframework</groupId>
     	<artifactId>spring-beans</artifactId>
-    	<version>4.2.0.RELEASE</version>
+    	<version>${spring-version}</version>
     </dependency>
     <dependency>
     	<groupId>org.springframework</groupId>
     	<artifactId>spring-context</artifactId>
-    	<version>4.2.0.RELEASE</version>
+    	<version>${spring-version}</version>
     </dependency>
     <dependency>
     	<groupId>org.springframework</groupId>
     	<artifactId>spring-core</artifactId>
-    	<version>4.2.0.RELEASE</version>
+    	<version>${spring-version}</version>
     </dependency>
     <dependency>
     	<groupId>org.springframework</groupId>
     	<artifactId>spring-web</artifactId>
-    	<version>4.2.0.RELEASE</version>
+    	<version>${spring-version}</version>
     </dependency>
     
     <!-- Jetty -->  
@@ -87,6 +87,12 @@
 		<artifactId>spring-jdbc</artifactId>
 		<version>4.2.0.RELEASE</version>
 	</dependency>
+	<dependency>
+	    <groupId>com.mchange</groupId>
+	    <artifactId>c3p0</artifactId>
+	    <version>0.9.5</version>
+	</dependency>
+		
 	<!-- 解決集群的共享session -->
     <dependency>
 	    <groupId>org.springframework.session</groupId>
@@ -148,6 +154,31 @@
 	    <artifactId>spring-data-redis</artifactId>
 	    <version>1.6.0.RELEASE</version>
 	</dependency>
+	
+	
+	<!-- activemq -->
+	<dependency>  
+            <groupId>org.springframework</groupId>  
+            <artifactId>spring-jms</artifactId>  
+            <version>${spring-version}</version>  
+        </dependency>  
+        <dependency>  
+            <groupId>org.springframework</groupId>  
+            <artifactId>spring-test</artifactId>  
+            <version>${spring-version}</version>  
+        </dependency>  
+        <dependency>  
+            <groupId>javax.annotation</groupId>  
+            <artifactId>jsr250-api</artifactId>  
+            <version>1.0</version>  
+        </dependency>  
+        <dependency>  
+            <groupId>org.apache.activemq</groupId>  
+            <artifactId>activemq-core</artifactId>  
+            <version>5.5.0</version>  
+        </dependency>
+	
+		
   </dependencies>
 
 	<build>
@@ -176,6 +207,7 @@
 	</build> 
 	
 	<properties>
+		<spring-version>4.2.0.RELEASE</spring-version> 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>

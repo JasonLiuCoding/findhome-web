@@ -18,7 +18,8 @@ public class LogicServiceImpl implements LogicService {
 
 	@Override
 	public User login(String userName, String password) {
-		User u = dao.login(userName, password);
+		//User u = dao.login(userName, password);
+		User u = dao.login2(userName, password);
 		return u;
 	}
 

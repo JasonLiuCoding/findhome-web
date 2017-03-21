@@ -15,4 +15,6 @@
 	<aop:aspectj-autoproxy/>
 	<import resource="spring-mybatis.xml"/>
 	<import resource="spring-redis.xml"/>
+	<import resource="spring-cache.xml"/>
+	<!-- <import resource="spring-jms.xml"/> -->
 </beans>

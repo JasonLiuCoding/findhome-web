@@ -39,6 +39,8 @@ public class UserManageController {
 	public String findUser(String name) {
 		UserInfo findUser = userService.findUser(name);
 		if (findUser != null) {
+			//userService.updateUser(findUser);
+			userService.updateUser(findUser.getUserId(), findUser.getName(), findUser.getAge(), findUser.getQq(), findUser.getPhone());
 			System.out.println(findUser.getName());
 		}
 		return "success";

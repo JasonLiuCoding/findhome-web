@@ -10,5 +10,7 @@ public interface UserService {
 	
 	public int updateUser(int id, String name, int age, String qq, String phone);
 	
+	public int updateUser(UserInfo userInfo);
+	
 	public int delete(int id);
 }

@@ -12,6 +12,9 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
@@ -43,6 +46,7 @@ public class UserServiceImpl implements UserService {
 
 	private Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
+	@Cacheable(value="userCache",condition="#name.length() <= 15")
 	@Override
 	public UserInfo findUser(String name) {
 		UserInfo findUser = userMapping.findUser(name);
@@ -84,9 +88,17 @@ public class UserServiceImpl implements UserService {
 		return 0;
 	}
 
+	@CacheEvict(value="userCache",key="#name")
 	@Override
 	public int updateUser(int userId, String name, int age, String qq, String phone) {
-		userMapping.update(new UserInfo(userId, name, age, phone, qq));
+		//userMapping.update(new UserInfo(userId, name, age, phone, qq));
+		return 0;
+	}
+	
+	//@CachePut(value="userCache",key="#userI.getName()")//更新缓存，即保存方法正常执行
+	@CacheEvict(value="userCache",key="#userI.getName()")
+	public int updateUser(UserInfo userI) {
+		//userMapping.update(userI);//xml没有配置，这里只是测试缓存用
 		return 0;
 	}
 
