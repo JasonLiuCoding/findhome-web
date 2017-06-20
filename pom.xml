@@ -92,6 +92,13 @@
 	    <artifactId>c3p0</artifactId>
 	    <version>0.9.5</version>
 	</dependency>
+
+	<!-- Quartz framework -->
+	<dependency>
+	    <groupId>org.quartz-scheduler</groupId>
+	    <artifactId>quartz</artifactId>
+	    <version>2.2.3</version>
+	</dependency>
 		
 	<!-- 解決集群的共享session -->
     <dependency>
@@ -235,7 +242,7 @@
 					<contextPath>/findhome-web</contextPath>
 					<connectors>
 						<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-							<port>8081</port>
+							<port>8082</port>
 						</connector>
 						<!-- <connector implementation="org.eclipse.jetty.server.ssl.SslSelectChannelConnector">
 	                        <port>9443</port>
